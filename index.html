@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Civil Rides | Hardin-Simmons University</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1612;
+    --paper: #f5f0e6;
+    --warm-white: #faf7f0;
+    --sepia: #8b7355;
+    --deep-brown: #3d2b1f;
+    --rust: #9e4a2f;
+    --gold: #c49a3c;
+    --clay: #a0522d;
+    --olive: #5a6340;
+    --muted-cream: #e8e0d0;
+    --light-line: #d4c9b8;
+    --faded: #a89880;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ===== NAVIGATION ===== */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 0.8rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.4s, box-shadow 0.4s;
+  }
+
+  nav.scrolled {
+    background: rgba(245, 240, 230, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 1px 0 var(--light-line);
+  }
+
+  nav .brand {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--deep-brown);
+    letter-spacing: 0.03em;
+  }
+
+  nav .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  nav .nav-links a {
+    text-decoration: none;
+    color: var(--sepia);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  nav .nav-links a:hover { color: var(--rust); }
+
+  .apply-btn {
+    background: var(--rust);
+    color: var(--warm-white) !important;
+    padding: 0.45rem 1.2rem;
+    border-radius: 3px;
+    transition: background 0.3s !important;
+  }
+
+  .apply-btn:hover { background: var(--deep-brown) !important; }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    position: relative;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(158, 74, 47, 0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(196, 154, 60, 0.05) 0%, transparent 50%),
+      var(--paper);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .hero-overline {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sepia);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s 0.3s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    line-height: 0.95;
+    color: var(--deep-brown);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 0.8s 0.5s forwards;
+  }
+
+  .hero h1 span {
+    display: block;
+    color: var(--rust);
+  }
+
+  .hero-subtitle {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    color: var(--sepia);
+    max-width: 600px;
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s 0.7s forwards;
+  }
+
+  .hero-details {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s 0.9s forwards;
+  }
+
+  .hero-details .detail {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--deep-brown);
+  }
+
+  .hero-details .sep {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 1.2s forwards;
+  }
+
+  .scroll-hint span {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--faded);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--faded), transparent);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== SECTION SHARED ===== */
+  section {
+    padding: 5rem 2rem;
+  }
+
+  .section-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 700;
+    color: var(--deep-brown);
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-body {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--ink);
+    max-width: 680px;
+  }
+
+  .section-body + .section-body {
+    margin-top: 1.2rem;
+  }
+
+  /* ===== REVEAL ANIMATION ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== ABOUT SECTION ===== */
+  .about {
+    background: var(--warm-white);
+    border-top: 1px solid var(--light-line);
+    border-bottom: 1px solid var(--light-line);
+  }
+
+  /* ===== ROUTE SECTION ===== */
+  .route-section { background: var(--paper); }
+
+  .route-map {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    margin-top: 3rem;
+    position: relative;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .route-stop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    flex: 0 0 auto;
+    width: 140px;
+  }
+
+  .route-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--rust);
+    border: 3px solid var(--paper);
+    box-shadow: 0 0 0 2px var(--rust);
+    z-index: 2;
+    margin-bottom: 0.8rem;
+  }
+
+  .route-stop:first-child .route-dot { background: var(--gold); box-shadow: 0 0 0 2px var(--gold); }
+  .route-stop:last-child .route-dot { background: var(--olive); box-shadow: 0 0 0 2px var(--olive); }
+
+  .route-city {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--deep-brown);
+    margin-bottom: 0.2rem;
+  }
+
+  .route-state {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--faded);
+  }
+
+  .route-connector {
+    flex: 0 0 40px;
+    height: 2px;
+    background: var(--light-line);
+    align-self: flex-start;
+    margin-top: 6px;
+  }
+
+  /* ===== THREE PILLARS ===== */
+  .pillars-section {
+    background: var(--deep-brown);
+    color: var(--paper);
+    border-top: 4px solid var(--gold);
+  }
+
+  .pillars-section .section-label { color: var(--gold); }
+  .pillars-section .section-title { color: var(--paper); }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .pillar {
+    padding: 2rem;
+    border: 1px solid rgba(196, 154, 60, 0.2);
+    border-top: 3px solid var(--gold);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .pillar-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--gold);
+    opacity: 0.4;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .pillar h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--paper);
+    margin-bottom: 0.8rem;
+  }
+
+  .pillar p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgba(245, 240, 230, 0.75);
+  }
+
+  /* ===== WHAT TO EXPECT ===== */
+  .expect-section { background: var(--warm-white); border-top: 1px solid var(--light-line); }
+
+  .daily-rhythm {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+  }
+
+  .rhythm-item {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .rhythm-time {
+    flex: 0 0 120px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--rust);
+    padding-top: 0.15rem;
+    text-align: right;
+  }
+
+  .rhythm-line {
+    flex: 0 0 2px;
+    background: var(--light-line);
+    align-self: stretch;
+    position: relative;
+  }
+
+  .rhythm-line::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: -4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--rust);
+  }
+
+  .rhythm-content h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--deep-brown);
+    margin-bottom: 0.3rem;
+  }
+
+  .rhythm-content p {
+    font-size: 0.95rem;
+    color: var(--sepia);
+    line-height: 1.6;
+    max-width: 500px;
+  }
+
+  /* ===== COURSES SECTION ===== */
+  .courses-section { background: var(--paper); border-top: 1px solid var(--light-line); }
+
+  .courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+  }
+
+  .course-card {
+    background: var(--warm-white);
+    padding: 2rem;
+    border: 1px solid var(--light-line);
+    border-top: 3px solid var(--rust);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .course-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(61, 43, 31, 0.1);
+  }
+
+  .course-code {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    color: var(--rust);
+    margin-bottom: 0.5rem;
+  }
+
+  .course-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--deep-brown);
+    margin-bottom: 0.8rem;
+  }
+
+  .course-desc {
+    font-size: 0.9rem;
+    color: var(--sepia);
+    line-height: 1.65;
+  }
+
+  .course-note {
+    margin-top: 1.5rem;
+    padding: 1rem 1.5rem;
+    background: var(--muted-cream);
+    border-left: 3px solid var(--gold);
+    font-size: 0.9rem;
+    color: var(--sepia);
+    font-style: italic;
+  }
+
+  /* ===== FACULTY ===== */
+  .faculty-section {
+    background: var(--warm-white);
+    border-top: 1px solid var(--light-line);
+  }
+
+  .faculty-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+  }
+
+  .faculty-card {
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .faculty-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: var(--muted-cream);
+    margin: 0 auto 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--sepia);
+    border: 2px solid var(--light-line);
+  }
+
+  .faculty-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--deep-brown);
+    margin-bottom: 0.3rem;
+  }
+
+  .faculty-role {
+    font-size: 0.85rem;
+    color: var(--rust);
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+  }
+
+  .faculty-bio {
+    font-size: 0.88rem;
+    color: var(--sepia);
+    line-height: 1.6;
+  }
+
+  /* ===== LOGISTICS ===== */
+  .logistics-section {
+    background: var(--paper);
+    border-top: 1px solid var(--light-line);
+  }
+
+  .logistics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .logistics-item h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--deep-brown);
+    margin-bottom: 0.6rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .logistics-item p,
+  .logistics-item li {
+    font-size: 0.92rem;
+    color: var(--sepia);
+    line-height: 1.65;
+  }
+
+  .logistics-item ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .logistics-item li {
+    padding: 0.4rem 0;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+
+  .logistics-item li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.85rem;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--rust);
+  }
+
+  /* ===== CTA / APPLY ===== */
+  .apply-section {
+    background: var(--deep-brown);
+    color: var(--paper);
+    text-align: center;
+    padding: 5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .apply-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 50%, rgba(196, 154, 60, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 50%, rgba(158, 74, 47, 0.06) 0%, transparent 50%);
+  }
+
+  .apply-section .section-inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .apply-section .section-label { color: var(--gold); }
+
+  .apply-section .section-title {
+    color: var(--paper);
+    margin-bottom: 1rem;
+  }
+
+  .apply-section .section-body {
+    color: rgba(245, 240, 230, 0.8);
+    margin: 0 auto 2.5rem;
+  }
+
+  .apply-cta-btn {
+    display: inline-block;
+    background: var(--rust);
+    color: var(--warm-white);
+    padding: 1rem 3rem;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  .apply-cta-btn:hover {
+    background: var(--clay);
+    transform: translateY(-2px);
+  }
+
+  .apply-note {
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    color: rgba(245, 240, 230, 0.5);
+  }
+
+  .qr-placeholder {
+    margin: 2.5rem auto 0;
+    width: 130px;
+    height: 130px;
+    border: 2px dashed rgba(196, 154, 60, 0.4);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+  }
+
+  .qr-placeholder span {
+    font-size: 0.75rem;
+    color: rgba(245, 240, 230, 0.4);
+    letter-spacing: 0.1em;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--ink);
+    color: rgba(245, 240, 230, 0.5);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.8rem;
+  }
+
+  footer a {
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  /* ===== DECORATIVE QUOTE ===== */
+  .pull-quote {
+    margin: 4rem 0;
+    padding: 2.5rem 3rem;
+    border-left: 4px solid var(--gold);
+    background: rgba(196, 154, 60, 0.04);
+  }
+
+  .pull-quote blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--deep-brown);
+    line-height: 1.5;
+  }
+
+  .pull-quote cite {
+    display: block;
+    margin-top: 0.8rem;
+    font-family: 'Source Sans 3', sans-serif;
+    font-style: normal;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--sepia);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    nav .nav-links { display: none; }
+
+    .hero { padding: 5rem 1.5rem 3rem; }
+    .hero-details { gap: 1rem; }
+
+    section { padding: 3.5rem 1.5rem; }
+
+    .route-map { gap: 0.5rem; }
+    .route-connector { flex: 0 0 20px; }
+    .route-stop { width: 100px; }
+
+    .rhythm-item { flex-direction: column; gap: 0.5rem; }
+    .rhythm-time { text-align: left; flex: none; }
+    .rhythm-line { display: none; }
+
+    .pull-quote { padding: 1.5rem; }
+    .pull-quote blockquote { font-size: 1.15rem; }
+  }
+
+  @media (max-width: 480px) {
+    .route-map {
+      flex-direction: column;
+      align-items: center;
+    }
+    .route-connector {
+      width: 2px;
+      height: 20px;
+      flex: 0 0 20px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="brand">Civil Rides</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#route">Route</a></li>
+    <li><a href="#courses">Courses</a></li>
+    <li><a href="#expect">What to Expect</a></li>
+    <li><a href="#faculty">Faculty</a></li>
+    <li><a href="#logistics">Logistics</a></li>
+    <li><a href="#apply" class="apply-btn">Apply</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-overline">Hardin-Simmons University &middot; May Term 2026</div>
+  <h1>Civil<span>Rides</span></h1>
+  <p class="hero-subtitle">A travel course through the American Civil Rights Trail</p>
+  <div class="hero-details">
+    <span class="detail">May 12&ndash;22, 2026</span>
+    <span class="sep"></span>
+    <span class="detail">10 Days</span>
+    <span class="sep"></span>
+    <span class="detail">4 States</span>
+    <span class="sep"></span>
+    <span class="detail">30 Students</span>
+  </div>
+  <div class="scroll-hint">
+    <span>Explore</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-inner reveal">
+    <div class="section-label">About the Course</div>
+    <h2 class="section-title">Walk the ground where<br>history was made</h2>
+    <p class="section-body">
+      Civil Rides is a ten-day travel course through the Deep South. You'll visit the sites where the Civil Rights Movement happened, read the primary sources that fueled it, and write your way into understanding what this history means for us now.
+    </p>
+    <p class="section-body">
+      Co-taught by faculty from English, Religion, and Sociology, this course treats civil rights landmarks as living texts. Churches, bridges, museums, courthouses, and memorial landscapes become the documents you read, analyze, and respond to through sustained writing and reflection.
+    </p>
+
+    <div class="pull-quote">
+      <blockquote>
+        &ldquo;The place to improve the world is first in one&rsquo;s own heart and head and hands, and then work outward from there.&rdquo;
+      </blockquote>
+      <cite>Robert M. Pirsig</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ROUTE -->
+<section class="route-section" id="route">
+  <div class="section-inner reveal">
+    <div class="section-label">The Route</div>
+    <h2 class="section-title">Mississippi to Arkansas</h2>
+    <p class="section-body">
+      From Abilene, you'll travel east to Jackson, Mississippi, then move through Alabama's Civil Rights corridor before turning north to Memphis and homeward through Little Rock. Each city anchors a movement of the course's larger arc: encounter, understanding, and formation.
+    </p>
+
+    <div class="route-map">
+      <div class="route-stop">
+        <div class="route-dot"></div>
+        <div class="route-city">Jackson</div>
+        <div class="route-state">Mississippi</div>
+      </div>
+      <div class="route-connector"></div>
+      <div class="route-stop">
+        <div class="route-dot"></div>
+        <div class="route-city">Montgomery</div>
+        <div class="route-state">Alabama</div>
+      </div>
+      <div class="route-connector"></div>
+      <div class="route-stop">
+        <div class="route-dot"></div>
+        <div class="route-city">Selma</div>
+        <div class="route-state">Alabama</div>
+      </div>
+      <div class="route-connector"></div>
+      <div class="route-stop">
+        <div class="route-dot"></div>
+        <div class="route-city">Birmingham</div>
+        <div class="route-state">Alabama</div>
+      </div>
+      <div class="route-connector"></div>
+      <div class="route-stop">
+        <div class="route-dot"></div>
+        <div class="route-city">Memphis</div>
+        <div class="route-state">Tennessee</div>
+      </div>
+      <div class="route-connector"></div>
+      <div class="route-stop">
+        <div class="route-dot"></div>
+        <div class="route-city">Little Rock</div>
+        <div class="route-state">Arkansas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THREE PILLARS -->
+<section class="pillars-section">
+  <div class="section-inner reveal">
+    <div class="section-label">Course Framework</div>
+    <h2 class="section-title">Three Pillars</h2>
+
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="pillar-number">I</div>
+        <h3>Place as Text</h3>
+        <p>Civil rights sites become your primary sources. You'll learn to read a memorial landscape, a church sanctuary, a bridge, and a museum the way you'd read a difficult and rewarding book: with attention to what's present, what's absent, and what's being asked of you.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-number">II</div>
+        <h3>Movement as Method</h3>
+        <p>Physical movement is an intentional learning practice. Walking the Edmund Pettus Bridge, standing in the Lorraine Motel balcony's shadow, sitting at a lunch counter: these create an embodied connection to those who moved before you.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-number">III</div>
+        <h3>Writing as Meaning-Making</h3>
+        <p>Writing transforms observation and embodied experience into durable insight. Through field notebooks, reflective journals, and a final portfolio, you'll interpret what it means to place your own body in spaces shaped by history.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT TO EXPECT -->
+<section class="expect-section" id="expect">
+  <div class="section-inner reveal">
+    <div class="section-label">What to Expect</div>
+    <h2 class="section-title">A day on the road</h2>
+    <p class="section-body">
+      This course has a rhythm. Each day follows a pattern designed to prepare you for what you'll encounter, give you space to experience it fully, and help you process what you've seen.
+    </p>
+
+    <div class="daily-rhythm">
+      <div class="rhythm-item">
+        <div class="rhythm-time">6:45 AM</div>
+        <div class="rhythm-line"></div>
+        <div class="rhythm-content">
+          <h4>Morning Office</h4>
+          <p>The group gathers before boarding to read the scriptural texts that inspired Civil Rights activists. This frames each day spiritually and intellectually.</p>
+        </div>
+      </div>
+      <div class="rhythm-item">
+        <div class="rhythm-time">On the Bus</div>
+        <div class="rhythm-line"></div>
+        <div class="rhythm-content">
+          <h4>Bus Reader</h4>
+          <p>En route to each site, you'll engage with curated historical texts, primary sources, and poetry that prepare you for what you're about to encounter.</p>
+        </div>
+      </div>
+      <div class="rhythm-item">
+        <div class="rhythm-time">Daytime</div>
+        <div class="rhythm-line"></div>
+        <div class="rhythm-content">
+          <h4>Site Visits</h4>
+          <p>Museums, churches, bridges, monuments, and memorial landscapes. You'll observe, document, and write using the S.P.A.C.E.S. methodology in your field notebook.</p>
+        </div>
+      </div>
+      <div class="rhythm-item">
+        <div class="rhythm-time">8:00 PM</div>
+        <div class="rhythm-line"></div>
+        <div class="rhythm-content">
+          <h4>Evening Examen</h4>
+          <p>A nightly debrief where the group processes the day together. Where was the consolation? Where was the desolation? What questions remain?</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="pull-quote" style="margin-bottom: 0;">
+      <blockquote>
+        This course is more than a tour. You'll eat at soul food restaurants with deep roots in the movement, attend worship services in historic churches, and encounter the art, music, and culture that sustained communities through struggle.
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section class="courses-section" id="courses">
+  <div class="section-inner reveal">
+    <div class="section-label">Enrollment</div>
+    <h2 class="section-title">Three courses, one journey</h2>
+    <p class="section-body">
+      All students travel together regardless of which course they're enrolled in. Each course shares the same itinerary and daily rhythm but emphasizes different disciplinary lenses and assignments.
+    </p>
+
+    <div class="courses-grid">
+      <div class="course-card">
+        <div class="course-code">ENGL 3300</div>
+        <div class="course-name">Writing as Discovery</div>
+        <p class="course-desc">Use writing as a tool for inquiry and meaning-making. You'll keep a field notebook, practice site-based analysis, and produce a final portfolio of polished writing drawn from your observations on the road.</p>
+      </div>
+      <div class="course-card">
+        <div class="course-code">RELI 2345</div>
+        <div class="course-name">Religion &amp; the Civil Rights Movement</div>
+        <p class="course-desc">Explore the theological foundations of the movement. How did faith sustain activists, shape their rhetoric, and inform their strategies for nonviolent resistance?</p>
+      </div>
+      <div class="course-card">
+        <div class="course-code">SOCI ____</div>
+        <div class="course-name">Sociology (Number TBA)</div>
+        <p class="course-desc">Examine the social structures, community organizing, and systemic forces at work in the Civil Rights Movement and their continuing relevance today.</p>
+      </div>
+    </div>
+
+    <div class="course-note">
+      Enroll in any one of the three. You do not need to be a major in that discipline. All three courses count as upper-division or mid-level elective credit.
+    </div>
+  </div>
+</section>
+
+<!-- FACULTY -->
+<section class="faculty-section" id="faculty">
+  <div class="section-inner reveal">
+    <div class="section-label">Faculty</div>
+    <h2 class="section-title">Your instructors</h2>
+
+    <div class="faculty-grid">
+      <div class="faculty-card">
+        <div class="faculty-avatar">JH</div>
+        <div class="faculty-name">Dr. Jason Harper</div>
+        <div class="faculty-role">English</div>
+        <p class="faculty-bio">Chair of the English Department. Specializes in rhetoric, composition, and writing pedagogy. Teaches ENGL 3300: Writing as Discovery.</p>
+      </div>
+      <div class="faculty-card">
+        <div class="faculty-avatar">KK</div>
+        <div class="faculty-name">Dr. Kelvin Kelley</div>
+        <div class="faculty-role">Religion</div>
+        <p class="faculty-bio">Faculty in the Holland School of Sciences and Mathematics. Brings expertise in theology and the faith traditions that shaped the Civil Rights Movement.</p>
+      </div>
+      <div class="faculty-card">
+        <div class="faculty-avatar">LC</div>
+        <div class="faculty-name">Dr. Lauren Cantrell</div>
+        <div class="faculty-role">Sociology</div>
+        <p class="faculty-bio">Faculty in Sociology and Social Work. Examines social structures, community organizing, and systemic justice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGISTICS -->
+<section class="logistics-section" id="logistics">
+  <div class="section-inner reveal">
+    <div class="section-label">Logistics</div>
+    <h2 class="section-title">What you need to know</h2>
+
+    <div class="logistics-grid">
+      <div class="logistics-item">
+        <h4>Dates</h4>
+        <p>May 12&ndash;22, 2026. This is a May Term course. You'll depart from Abilene on May 12 and return no later than May 22.</p>
+      </div>
+      <div class="logistics-item">
+        <h4>Cost</h4>
+        <p>Estimated costs and what's included will be shared with accepted applicants. The course fee covers transportation, lodging, site admission, and group meals. May Term tuition is separate.</p>
+      </div>
+      <div class="logistics-item">
+        <h4>Transportation</h4>
+        <p>We travel together by university vehicle. All transportation during the trip is provided. You'll need to arrange your own way to and from the departure point in Abilene.</p>
+      </div>
+      <div class="logistics-item">
+        <h4>Who Can Apply</h4>
+        <ul>
+          <li>Open to all HSU students regardless of major</li>
+          <li>Limited to 30 students</li>
+          <li>Enrollment is by application only</li>
+          <li>Must be able to commit to the full 10-day itinerary</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLY -->
+<section class="apply-section" id="apply">
+  <div class="section-inner reveal">
+    <div class="section-label">Apply</div>
+    <h2 class="section-title">Ready to go?</h2>
+    <p class="section-body">
+      Spaces are limited to 30 students. Complete the application to be considered for enrollment permission. We're looking for students who are ready to engage seriously with difficult history, travel well with others, and commit to the full experience.
+    </p>
+    <a href="#" class="apply-cta-btn">Start Your Application</a>
+    <p class="apply-note">Applications are reviewed on a rolling basis. You'll be notified of your status by email.</p>
+
+    <div class="qr-placeholder">
+      <span>QR CODE</span>
+      <span>GOES HERE</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Civil Rides &middot; Hardin-Simmons University &middot; English Department</p>
+  <p style="margin-top: 0.4rem;">Questions? Contact <a href="mailto:">the English Department</a></p>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
