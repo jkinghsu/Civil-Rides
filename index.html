@@ -607,6 +607,40 @@
     background: var(--rust);
   }
 
+  /* ===== FAQ ===== */
+  .faq-section {
+    background: var(--warm-white);
+    border-top: 1px solid var(--light-line);
+  }
+
+  .faq-list {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .faq-item {
+    padding: 1.5rem 2rem;
+    background: var(--paper);
+    border: 1px solid var(--light-line);
+    border-left: 3px solid var(--rust);
+  }
+
+  .faq-question {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--deep-brown);
+    margin-bottom: 0.5rem;
+  }
+
+  .faq-answer {
+    font-size: 0.95rem;
+    color: var(--sepia);
+    line-height: 1.65;
+  }
+
   /* ===== CTA / APPLY ===== */
   .apply-section {
     background: var(--deep-brown);
@@ -713,7 +747,7 @@
   .pull-quote blockquote {
     font-family: 'Playfair Display', serif;
     font-size: 1.4rem;
-    font-style: italic;
+    font-style: normal;
     color: var(--deep-brown);
     line-height: 1.5;
   }
@@ -774,6 +808,7 @@
     <li><a href="#expect">What to Expect</a></li>
     <li><a href="#faculty">Faculty</a></li>
     <li><a href="#logistics">Logistics</a></li>
+    <li><a href="#faq">FAQ</a></li>
     <li><a href="#apply" class="apply-btn">Apply</a></li>
   </ul>
 </nav>
@@ -868,31 +903,7 @@
   </div>
 </section>
 
-<!-- THREE PILLARS -->
-<section class="pillars-section">
-  <div class="section-inner reveal">
-    <div class="section-label">Course Framework</div>
-    <h2 class="section-title">Three Pillars</h2>
 
-    <div class="pillars-grid">
-      <div class="pillar">
-        <div class="pillar-number">I</div>
-        <h3>Place as Text</h3>
-        <p>Civil rights sites become your primary sources. You'll learn to read a memorial landscape, a church sanctuary, a bridge, and a museum the way you'd read a difficult and rewarding book: with attention to what's present, what's absent, and what's being asked of you.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-number">II</div>
-        <h3>Movement as Method</h3>
-        <p>Physical movement is an intentional learning practice. Walking the Edmund Pettus Bridge, standing in the Lorraine Motel balcony's shadow, sitting at a lunch counter: these create an embodied connection to those who moved before you.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-number">III</div>
-        <h3>Writing as Meaning-Making</h3>
-        <p>Writing transforms observation and embodied experience into durable insight. Through field notebooks, reflective journals, and a final portfolio, you'll interpret what it means to place your own body in spaces shaped by history.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- WHAT TO EXPECT -->
 <section class="expect-section" id="expect">
@@ -940,7 +951,7 @@
 
     <div class="pull-quote" style="margin-bottom: 0;">
       <blockquote>
-        This course is more than a tour. You'll eat at soul food restaurants with deep roots in the movement, attend worship services in historic churches, and encounter the art, music, and culture that sustained communities through struggle.
+        This course is more than a tour. It's an experience of culture, community, and faith. You'll visit historic sites, worship together in churches that shaped the movement, encounter art and music, share meals, and have lots of conversation along the way.
       </blockquote>
     </div>
   </div>
@@ -987,22 +998,22 @@
 
     <div class="faculty-grid">
       <div class="faculty-card">
-        <div class="faculty-avatar">JH</div>
-        <div class="faculty-name">Dr. Jason Harper</div>
+        <div class="faculty-avatar">JK</div>
+        <div class="faculty-name">Dr. Jason King</div>
         <div class="faculty-role">English</div>
         <p class="faculty-bio">Chair of the English Department. Specializes in rhetoric, composition, and writing pedagogy. Teaches ENGL 3300: Writing as Discovery.</p>
       </div>
       <div class="faculty-card">
         <div class="faculty-avatar">KK</div>
         <div class="faculty-name">Dr. Kelvin Kelley</div>
-        <div class="faculty-role">Religion</div>
-        <p class="faculty-bio">Faculty in the Holland School of Sciences and Mathematics. Brings expertise in theology and the faith traditions that shaped the Civil Rights Movement.</p>
+        <div class="faculty-role">Applied Theology</div>
+        <p class="faculty-bio">Professor of Applied Theology in the Logsdon School of Theology.</p>
       </div>
       <div class="faculty-card">
         <div class="faculty-avatar">LC</div>
         <div class="faculty-name">Dr. Lauren Cantrell</div>
-        <div class="faculty-role">Sociology</div>
-        <p class="faculty-bio">Faculty in Sociology and Social Work. Examines social structures, community organizing, and systemic justice.</p>
+        <div class="faculty-role">Social Work</div>
+        <p class="faculty-bio">Chair of the Social Work Department.</p>
       </div>
     </div>
   </div>
@@ -1021,11 +1032,11 @@
       </div>
       <div class="logistics-item">
         <h4>Cost</h4>
-        <p>Estimated costs and what's included will be shared with accepted applicants. The course fee covers transportation, lodging, site admission, and group meals. May Term tuition is separate.</p>
+        <p>Cost is to be determined. Check back here for updates soon.</p>
       </div>
       <div class="logistics-item">
         <h4>Transportation</h4>
-        <p>We travel together by university vehicle. All transportation during the trip is provided. You'll need to arrange your own way to and from the departure point in Abilene.</p>
+        <p>We travel together by charter bus. All transportation during the trip is provided.</p>
       </div>
       <div class="logistics-item">
         <h4>Who Can Apply</h4>
@@ -1035,6 +1046,21 @@
           <li>Enrollment is by application only</li>
           <li>Must be able to commit to the full 10-day itinerary</li>
         </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="section-inner reveal">
+    <div class="section-label">FAQ</div>
+    <h2 class="section-title">Frequently asked questions</h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <h4 class="faq-question">Question coming soon</h4>
+        <p class="faq-answer">Check back for updates.</p>
       </div>
     </div>
   </div>
@@ -1060,8 +1086,8 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>Civil Rides &middot; Hardin-Simmons University &middot; English Department</p>
-  <p style="margin-top: 0.4rem;">Questions? Contact <a href="mailto:">the English Department</a></p>
+  <p>Civil Rides &middot; Hardin-Simmons University</p>
+  <p style="margin-top: 0.4rem;">Questions? Contact Dr. Jason King at <a href="mailto:jking@hsutx.edu">jking@hsutx.edu</a></p>
 </footer>
 
 <script>
