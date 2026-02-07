@@ -276,6 +276,71 @@
     border-bottom: 1px solid var(--light-line);
   }
 
+  /* ===== OUR ROOTS (SIMMONS) ===== */
+  .roots-section {
+    background: var(--deep-brown);
+    color: var(--paper);
+  }
+
+  .roots-section .section-label {
+    color: var(--gold);
+  }
+
+  .roots-section .section-title {
+    color: var(--paper);
+  }
+
+  .roots-section .section-body {
+    color: rgba(245, 240, 230, 0.85);
+  }
+
+  .roots-section .pull-quote blockquote {
+    color: var(--paper);
+  }
+
+  .roots-section .pull-quote {
+    border-left-color: var(--gold);
+    background: rgba(196, 154, 60, 0.08);
+  }
+
+  .roots-section .pull-quote cite {
+    color: rgba(245, 240, 230, 0.5);
+  }
+
+  .simmons-questions {
+    margin: 2.5rem 0;
+    padding: 2rem 2.5rem;
+    border: 1px solid rgba(196, 154, 60, 0.3);
+    background: rgba(196, 154, 60, 0.06);
+  }
+
+  .simmons-q {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .simmons-q:last-child {
+    margin-bottom: 0;
+  }
+
+  .q-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .q-text {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--paper);
+    line-height: 1.6;
+  }
+
   /* ===== ROUTE SECTION ===== */
   .route-section { background: var(--paper); }
 
@@ -337,6 +402,7 @@
     margin-top: 6px;
   }
 
+  
   /* ===== THREE PILLARS ===== */
   .pillars-section {
     background: var(--deep-brown);
@@ -826,9 +892,60 @@
     color: var(--sepia);
   }
 
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 101;
+  }
+
+  .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--deep-brown);
+    margin: 5px 0;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  .nav-toggle.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav-toggle.open span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
   /* ===== RESPONSIVE ===== */
   @media (max-width: 768px) {
-    nav .nav-links { display: none; }
+    .nav-toggle { display: block; }
+
+    nav .nav-links {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(245, 240, 230, 0.98);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      z-index: 100;
+    }
+
+    nav .nav-links.open {
+      display: flex;
+    }
+
+    nav .nav-links a {
+      font-size: 1.1rem;
+    }
 
     .hero { padding: 5rem 1.5rem 3rem; }
     .hero-details { gap: 1rem; }
@@ -865,8 +982,12 @@
 <!-- NAV -->
 <nav id="navbar">
   <div class="brand">Civil Rides</div>
-  <ul class="nav-links">
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
     <li><a href="#about">About</a></li>
+    <li><a href="#roots">Our Roots</a></li>
     <li><a href="#route">Route</a></li>
     <li><a href="#courses">Courses</a></li>
     <li><a href="#expect">What to Expect</a></li>
@@ -907,15 +1028,61 @@
       Civil Rides is a ten-day travel course through the Deep South. You'll visit the sites where the Civil Rights Movement happened, read the primary sources that fueled it, and write your way into understanding what this history means for us now.
     </p>
     <p class="section-body">
-      Co-taught by faculty from English, Religion, and Sociology, this course treats civil rights landmarks as living texts. Churches, bridges, museums, courthouses, and memorial landscapes become the documents you read, analyze, and respond to through sustained writing and reflection.
+      Co-taught by faculty from English, Theology, and Social Work, this course treats civil rights landmarks as living texts. Churches, bridges, museums, courthouses, and memorial landscapes become the documents you read, analyze, and respond to through sustained writing and reflection.
     </p>
 
     <div class="pull-quote">
       <blockquote>
-        &ldquo;The place to improve the world is first in one&rsquo;s own heart and head and hands, and then work outward from there.&rdquo;
+        &ldquo;When in the name of heaven, shall a man who fears God speak, if not now?&rdquo;
       </blockquote>
-      <cite>Robert M. Pirsig</cite>
+      <cite>James B. Simmons, HSU Founder, 1858</cite>
     </div>
+  </div>
+</section>
+
+<!-- OUR ROOTS -->
+<section class="roots-section" id="roots">
+  <div class="section-inner reveal">
+    <div class="section-label">Our Roots</div>
+    <h2 class="section-title">If not now, when?</h2>
+
+    <p class="section-body">
+      In 1858, James B. Simmons, a Baptist pastor in Indianapolis, watched a fugitive slave get shot in the street by a deputy marshal. He was horrified. He asked himself a question that would define the rest of his life:
+    </p>
+
+    <div class="pull-quote roots-quote">
+      <blockquote>
+        &ldquo;When in the name of heaven, shall a man who fears God speak, if not now?&rdquo; I did speak. My subject was &lsquo;The American Slave System tried by the Golden Rule.&rsquo;
+      </blockquote>
+    </div>
+
+    <p class="section-body">
+      He spoke. He was threatened with tar and feathers. His church burned to the ground. And he kept going.
+    </p>
+    <p class="section-body">
+      After the Civil War, Simmons devoted himself to building schools for formerly enslaved people across the South. As Corresponding Secretary of the American Baptist Home Mission Society, he helped found ten colleges, including institutions that became Virginia Union University, Benedict College, Shaw University, and Morehouse College. For Simmons, education was the engine of moral transformation.
+    </p>
+    <p class="section-body">
+      This is the man who founded our university. His remains are buried on our campus, next to his wife Mary, just south of where Old Main once stood. He hoped that even their "very ashes may witness for Christian Education."
+    </p>
+    <p class="section-body">
+      Before he died, Simmons sent a letter to Abilene with two questions he asked of every faculty member, trustee, and student at the college he had founded:
+    </p>
+
+    <div class="simmons-questions">
+      <div class="simmons-q">
+        <span class="q-number">I.</span>
+        <span class="q-text">What is the greatest thought that has ever occupied your mind?</span>
+      </div>
+      <div class="simmons-q">
+        <span class="q-number">II.</span>
+        <span class="q-text">What is your duty toward fulfilling it?</span>
+      </div>
+    </div>
+
+    <p class="section-body">
+      Civil Rides takes students to the places where Americans answered those questions with their lives. We travel in the spirit of our founder, who understood that Christian faith demands more than knowing. It demands doing.
+    </p>
   </div>
 </section>
 
@@ -965,10 +1132,9 @@
         <div class="route-state">Arkansas</div>
       </div>
     </div>
+
   </div>
 </section>
-
-
 
 <!-- WHAT TO EXPECT -->
 <section class="expect-section" id="expect">
@@ -1016,7 +1182,7 @@
 
     <div class="pull-quote" style="margin-bottom: 0;">
       <blockquote>
-        This course is more than a tour. It's an experience of culture, community, and faith. You'll visit historic sites, worship together in churches that shaped the movement, encounter art and music, share meals, and have lots of conversation along the way.
+        This course is more than a tour. It's an experience of culture, community, and faith. You'll visit historic sites, worship together in churches that shaped the movement, encounter art and music, share meals, and wrestle with the questions our founder asked of every student: What is the greatest thought that has ever occupied your mind, and what will you do about it?
       </blockquote>
     </div>
   </div>
@@ -1043,8 +1209,8 @@
         <p class="course-desc">Explore the theological foundations of the movement. How did faith sustain activists, shape their rhetoric, and inform their strategies for nonviolent resistance?</p>
       </div>
       <div class="course-card">
-        <div class="course-code">SOCI ____</div>
-        <div class="course-name">Sociology (Number TBA)</div>
+        <div class="course-code">SCWK 4099</div>
+        <div class="course-name">Social Work</div>
         <p class="course-desc">Examine the social structures, community organizing, and systemic forces at work in the Civil Rights Movement and their continuing relevance today.</p>
       </div>
     </div>
@@ -1206,7 +1372,16 @@
       if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
+      // Close mobile menu on link click
+      document.getElementById('navLinks').classList.remove('open');
+      document.getElementById('navToggle').classList.remove('open');
     });
+  });
+
+  // Hamburger menu toggle
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+    document.getElementById('navToggle').classList.toggle('open');
   });
 </script>
 
